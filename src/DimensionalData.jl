@@ -11,6 +11,7 @@ using Base.Broadcast: Broadcasted, BroadcastStyle, DefaultArrayStyle, AbstractAr
       Unknown
 
 using Adapt,
+      ArrayInterface,
       ConstructionBase,
       Dates,
       LinearAlgebra,
@@ -21,10 +22,7 @@ using Adapt,
 
 using Base: tail, OneTo, @propagate_inbounds
 
-
-export Dimension, IndependentDim, DependentDim, XDim, YDim, ZDim, TimeDim,
-       X, Y, Z, Ti, ParametricDimension, Dim, AnonDim
-
+export Dimension, IndependentDim, DependentDim, XDim, YDim, ZDim, TimeDim, X, Y, Z, Ti, ParametricDimension, Dim, AnonDim
 export Selector, At, Between, Contains, Near, Where
 
 export Locus, Center, Start, End, AutoLocus
@@ -85,6 +83,7 @@ include("methods.jl")
 include("matmul.jl")
 include("set.jl")
 include("utils.jl")
+include("array_interface.jl")
 include("plotrecipes.jl")
 include("show.jl")
 
