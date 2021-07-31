@@ -19,7 +19,7 @@ using Adapt,
       SparseArrays,
       Tables
 
-using Base: tail, OneTo, @propagate_inbounds
+using Base: tail, OneTo, @propagate_inbounds, Fix2
 
 
 export Dimension, IndependentDim, DependentDim, XDim, YDim, ZDim, TimeDim,
