@@ -148,10 +148,11 @@ mean(A3; dims=Ti)
 - `mapslices`, `eachslice`
 
 
-## LookupArrays and Selectors
+## Selectors
 
-Indexing by value in `DimensionalData` is done with [Selectors](@ref).
+Indexing by value in `DimensionalData` is done with [`Selector`](@ref)s.
 
+| [`Selector`](@ref) | Description                                                        |
 | :----------------- | :----------------------------------------------------------------- |
 | [`At`](@ref)       | get the index exactly matching the passed in value(s)              |
 | [`Near`](@ref)     | get the closest index to the passed in value(s)                    |
@@ -202,7 +203,7 @@ But unless the `DimArray` is one dimensional, this will return a regular
 `Array`. It is not possible to keep the `LookupArray` or even `Dimension`s after
 linear indexing is used.
 
-## LookupArrays and traits
+## LookupArrays and their traits
 
 Using a regular range or `Vector` as a lookup index has a number of downsides.
 We cannot use `searchsorted` for fast searches without knowing the order of the
@@ -238,29 +239,23 @@ behaviours, such as:
 1. Selection of [`Intervals`](@ref) or [`Points`](@ref), which will give slightly
   different results for selectors like [`Between`](@ref) - as whole intervals are
   selected, and have different `bounds` values.
-
 2. Tracking of lookup order. A reverse order is labelled `ReverseOrdered` and
   will still work with `searchsorted`, and for plots to always be the right way
   up when either the index or the array is backwards. Reversing a `DimArray`
   will reverse the `LookupArray` for that dimension, swapping `ReverseOrdered`
   to `ForwardOrdered`.
-
 3. `Sampled` [`Intervals`](@ref) can have index located at a [`Locus`](@ref) of: 
-
-- [`Start`](@ref),
-- [`Center`](@ref) 
-- [`End`](@ref)
-
-Which specifies the point of the interval represented in the index, to match
-different data standards, e.g. GeoTIFF (`Start`) and NetCDF (`Center`).
-
+  - [`Start`](@ref),
+  - [`Center`](@ref) 
+  - [`End`](@ref)
+  Which specifies the point of the interval represented in the index, to match
+  different data standards, e.g. GeoTIFF (`Start`) and NetCDF (`Center`).
 4. A [`Span`](@ref) specifies the gap between `Points` or the size of
 `Intervals`. This may be: 
-
-- [`Regular`](@ref), in the case of a range and equally spaced vector, 
-- [`Irregular`](@ref) for unequally spaced vectors
-- [`Explicit`](@ref) for the case where all interval start and end points are
-  specified explicitly - as is common in the NetCDF standard.
+  - [`Regular`](@ref), in the case of a range and equally spaced vector, 
+  - [`Irregular`](@ref) for unequally spaced vectors
+  - [`Explicit`](@ref) for the case where all interval start and end points are
+    specified explicitly - as is common in the NetCDF standard.
 
 These traits all for subtypes of [`Aligned`](@ref).
 
@@ -271,8 +266,7 @@ rotated or otherwise transformed in relation to the underlying array, such as
 
 ## LookupArray detection
 
-[`Aligned`](@ref) types will be detected automatically if not specified - which
-usually isn't required. 
+Most lookups will be detected automatically if not specified.
 
 - An empty `Dimension` or a `Type` or `Symbol` will be assigned `NoLookup` -
   this behaves as a simple named dimension without a lookup index.
